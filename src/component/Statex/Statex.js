@@ -11,26 +11,38 @@ function Statex() {
 
   const API_BASE_URL = "https://crio-location-selector.onrender.com";
 
+  // Fetch countries on initial load
   useEffect(() => {
     fetch(`${API_BASE_URL}/countries`)
       .then((res) => res.json())
-      .then((data) => setCountries(data || []))
+      .then((data) => {
+        console.log("Countries fetched:", data);
+        setCountries(data || []);
+      })
       .catch((error) => console.error("Error fetching countries:", error));
   }, []);
 
+  // Fetch states when country is selected
   useEffect(() => {
     if (!selectedCountry) return;
     fetch(`${API_BASE_URL}/country=${selectedCountry}/states`)
       .then((res) => res.json())
-      .then((data) => setStates(data || []))
+      .then((data) => {
+        console.log("States fetched:", data);
+        setStates(data || []);
+      })
       .catch((error) => console.error("Error fetching states:", error));
   }, [selectedCountry]);
 
+  // Fetch cities when state is selected
   useEffect(() => {
     if (!selectedState) return;
     fetch(`${API_BASE_URL}/country=${selectedCountry}/state=${selectedState}/cities`)
       .then((res) => res.json())
-      .then((data) => setCities(data || []))
+      .then((data) => {
+        console.log("Cities fetched:", data);
+        setCities(data || []);
+      })
       .catch((error) => console.error("Error fetching cities:", error));
   }, [selectedState, selectedCountry]);
 
@@ -48,6 +60,7 @@ function Statex() {
           setSelectedCity("");
           setStates([]);
           setCities([]);
+          console.log("Country selected:", e.target.value);
         }}
       >
         <option value="">Select Country</option>
@@ -66,6 +79,7 @@ function Statex() {
           setSelectedState(e.target.value);
           setSelectedCity("");
           setCities([]);
+          console.log("State selected:", e.target.value);
         }}
         disabled={!selectedCountry}
       >
@@ -81,7 +95,10 @@ function Statex() {
       <select
         className="city_select"
         value={selectedCity}
-        onChange={(e) => setSelectedCity(e.target.value)}
+        onChange={(e) => {
+          setSelectedCity(e.target.value);
+          console.log("City selected:", e.target.value);
+        }}
         disabled={!selectedState}
       >
         <option value="">Select City</option>
