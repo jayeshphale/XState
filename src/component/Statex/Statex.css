@@ -1,0 +1,121 @@
+/* General Styling */
+body {
+  background: linear-gradient(
+    to right,
+    #6f7280,
+    #2a2c3c,
+    #181827,
+    #833ab4,
+    #fd1d1d,
+    #fcb045
+  );
+  background-size: 400% 400%;
+  animation: body 10s infinite ease-in-out;
+  color: white;
+  font-family: "Arial", sans-serif;
+}
+
+@keyframes body {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+/* Container */
+.main_div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/* Heading */
+.select_heading {
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to right, #fcb045, #fd1d1d, #833ab4);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Dropdowns */
+select {
+  width: 260px;
+  padding: 12px;
+  margin: 12px;
+  border: none;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  color: rgb(1, 0, 0);
+  font-size: 16px;
+  font-weight: bold;
+  box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  transition: transform 0.3s ease, background 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+select:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  cursor: not-allowed;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+select:hover {
+  transform: scale(1.05);
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Selection Display */
+.All_thingsTogeter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 20px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  box-shadow: 2px 2px 14px rgba(0, 0, 0, 0.3);
+  flex-wrap: wrap;
+  backdrop-filter: blur(10px);
+}
+
+.All_thingsTogeter p {
+  font-size: 18px;
+  color: #ffffff;
+  margin: 0;
+  display: inline;
+}
+
+/* Styling for Selected Values */
+.selected_label {
+  font-size: 20px;
+  font-weight: bold;
+  color: #fcb045;
+  display: inline;
+}
+
+.selected_country {
+  font-size: 32px;
+  font-weight: bold;
+  color: #fd1d1d;
+  display: inline;
+}
+
+.selected_state,
+.selected_city {
+  font-size: 22px;
+  font-weight: bold;
+  color: #833ab4;
+  display: inline;
+}
