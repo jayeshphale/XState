@@ -94,10 +94,11 @@ function Statex() {
 
       {/* DISPLAY SELECTED VALUES */}
       <div className="All_thingsTogeter">
-        {selectedCountry && <p className="selected_label">You selected:</p>}
-        {selectedCountry && <p className="selected_country">{selectedCountry}</p>}
-        {selectedState && <p className="selected_state">, {selectedState}</p>}
-        {selectedCity && <p className="selected_city">, {selectedCity}</p>}
+        {selectedCountry && selectedState && selectedCity && (
+          <p className="selected_city">
+            You selected {selectedCity}, {selectedState}, {selectedCountry}
+          </p>
+        )}
       </div>
     </div>
   );
