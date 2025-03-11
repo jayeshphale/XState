@@ -1,3 +1,9 @@
+@keyframes gradientAnimation {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
 .main_div {
   display: flex;
   flex-direction: column;
@@ -5,9 +11,12 @@
   justify-content: center;
   height: 100vh;
   background: linear-gradient(135deg, #6e8efb, #a777e3);
+  background-size: 200% 200%;
+  animation: gradientAnimation 6s ease infinite;
   color: white;
   font-family: "Arial", sans-serif;
 }
+
 
 /* Heading */
 .select_heading {
