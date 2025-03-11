@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import "./Statex.css";
 
 function Statex() {
-  const [countries, setCountries] = useState();
-  const [states, setStates] = useState();
-  const [cities, setCities] = useState();
+  const [countries, setCountries] = useState(); // Initialize as an empty array
+  const [states, setStates] = useState(); // Initialize as an empty array
+  const [cities, setCities] = useState(); // Initialize as an empty array
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
@@ -17,7 +17,7 @@ function Statex() {
       .then((res) => res.json())
       .then((data) => {
         console.log("Countries fetched:", data);
-        setCountries(data ||);
+        setCountries(data ||); // Set countries data (or an empty array if data is null/undefined)
       })
       .catch((error) => console.error("Error fetching countries:", error));
   },);
@@ -29,7 +29,7 @@ function Statex() {
       .then((res) => res.json())
       .then((data) => {
         console.log("States fetched:", data);
-        setStates(data ||);
+        setStates(data ||); // Set states data (or an empty array if data is null/undefined)
       })
       .catch((error) => console.error("Error fetching states:", error));
   }, [selectedCountry]);
@@ -41,7 +41,7 @@ function Statex() {
       .then((res) => res.json())
       .then((data) => {
         console.log("Cities fetched:", data);
-        setCities(data ||);
+        setCities(data ||); // Set cities data (or an empty array if data is null/undefined)
       })
       .catch((error) => console.error("Error fetching cities:", error));
   }, [selectedState, selectedCountry]);
@@ -56,9 +56,9 @@ function Statex() {
         value={selectedCountry}
         onChange={(e) => {
           setSelectedCountry(e.target.value);
-          setSelectedState("");
+          setSelectedState(""); // Reset state and city when country changes
           setSelectedCity("");
-          setStates();
+          setStates(); // Clear states and cities when country changes
           setCities();
           console.log("Country selected:", e.target.value);
         }}
@@ -77,11 +77,11 @@ function Statex() {
         value={selectedState}
         onChange={(e) => {
           setSelectedState(e.target.value);
-          setSelectedCity("");
-          setCities();
+          setSelectedCity(""); // Reset city when state changes
+          setCities(); // Clear cities when state changes
           console.log("State selected:", e.target.value);
         }}
-        disabled={!selectedCountry}
+        disabled={!selectedCountry} // Disable state selection if no country is selected
       >
         <option value="">Select State</option>
         {states.map((state) => (
@@ -99,7 +99,7 @@ function Statex() {
           setSelectedCity(e.target.value);
           console.log("City selected:", e.target.value);
         }}
-        disabled={!selectedState}
+        disabled={!selectedState} // Disable city selection if no state is selected
       >
         <option value="">Select City</option>
         {cities.map((city) => (
@@ -111,7 +111,7 @@ function Statex() {
 
       {/* DISPLAY SELECTED VALUES */}
       <div className="All_thingsTogeter">
-        {selectedCountry && selectedState && selectedCity && (
+        {selectedCountry && selectedState && selectedCity && ( // Only display if all three are selected
           <p className="selected_city">
             You selected {selectedCity}, {selectedState}, {selectedCountry}
           </p>
