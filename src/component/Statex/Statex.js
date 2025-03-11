@@ -12,25 +12,7 @@ function Statex() {
 
   const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchCountries = async () => {
-      try {
-        const response = await fetch(
-          "https://crio-location-selector.onrender.com/countries"
-        );
-        if (!response.ok) throw new Error("Failed to fetch countries");
-        const data = await response.json();
-        setCountries(data);
-      } catch (error) {
-        setError("Error fetching countries");
-        console.error(error);
-      }
-    };
-
-    fetchCountries();
-  }, []);
-
-  useEffect(() => {
+    useEffect(() => {
     if (!selectedCountry) return;
     const fetchStates = async () => {
       try {
@@ -48,6 +30,24 @@ function Statex() {
 
     fetchStates();
   }, [selectedCountry]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await fetch(
+          "https://crio-location-selector.onrender.com/countries"
+        );
+        if (!response.ok) throw new Error("Failed to fetch countries");
+        const data = await response.json();
+        setCountries(data);
+      } catch (error) {
+        setError("Error fetching countries");
+        console.error(error);
+      }
+    };
+
+    fetchCountries();
+  }, []);
 
   useEffect(() => {
     if (!selectedState) return;
