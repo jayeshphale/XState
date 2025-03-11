@@ -8,6 +8,7 @@ function Statex() {
   const [selectedCountry, setSelectedCountry] = useState("");
   const [selectedState, setSelectedState] = useState("");
   const [selectedCity, setSelectedCity] = useState("");
+  const [errorMessage, setErrorMessage] = useState(""); // Add error message state
 
   const API_BASE_URL = "https://crio-location-selector.onrender.com";
 
@@ -19,38 +20,54 @@ function Statex() {
         console.log("Countries fetched:", data);
         setCountries(data || []);
       })
-      .catch((error) => console.error("Error fetching countries:", error));
+      .catch((error) => {
+        console.error("Error fetching countries:", error);
+        setErrorMessage("Failed to load countries."); // Set error message
+      });
   }, []);
 
   // Fetch states when country is selected
   useEffect(() => {
     if (!selectedCountry) return;
-    fetch(`${API_BASE_URL}/country=${selectedCountry}/states`)
+    fetch(
+      `${API_BASE_URL}/country=${encodeURIComponent(selectedCountry)}/states`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("States fetched:", data);
         setStates(data || []);
+        setErrorMessage(""); // Clear error message
       })
-      .catch((error) => console.error("Error fetching states:", error));
+      .catch((error) => {
+        console.error("Error fetching states:", error);
+        setErrorMessage("Failed to load states."); // Set error message
+      });
   }, [selectedCountry]);
 
   // Fetch cities when state is selected
   useEffect(() => {
     if (!selectedState) return;
-    fetch(`${API_BASE_URL}/country=${selectedCountry}/state=${selectedState}/cities`)
+    fetch(
+      `${API_BASE_URL}/country=${encodeURIComponent(
+        selectedCountry
+      )}/state=${encodeURIComponent(selectedState)}/cities`
+    )
       .then((res) => res.json())
       .then((data) => {
         console.log("Cities fetched:", data);
         setCities(data || []);
+        setErrorMessage(""); // Clear error message
       })
-      .catch((error) => console.error("Error fetching cities:", error));
+      .catch((error) => {
+        console.error("Error fetching cities:", error);
+        setErrorMessage("Failed to load cities."); // Set error message
+      });
   }, [selectedState, selectedCountry]);
 
   return (
     <div className="main_div">
       <div className="select_heading">Select Location</div>
-
-      {/* COUNTRY SELECT */}
+      {errorMessage && <p style={{ color: "red" }}>{errorMessage}</p>} {/* Display error message */}
       <select
         className="country_select"
         value={selectedCountry}
@@ -71,7 +88,6 @@ function Statex() {
         ))}
       </select>
 
-      {/* STATE SELECT */}
       <select
         className="state_select"
         value={selectedState}
@@ -91,7 +107,6 @@ function Statex() {
         ))}
       </select>
 
-      {/* CITY SELECT */}
       <select
         className="city_select"
         value={selectedCity}
@@ -109,7 +124,6 @@ function Statex() {
         ))}
       </select>
 
-      {/* DISPLAY SELECTED VALUES */}
       <div className="All_thingsTogeter">
         {selectedCountry && selectedState && selectedCity && (
           <p className="selected_city">
