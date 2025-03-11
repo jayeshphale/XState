@@ -4,7 +4,7 @@ import Statex from './component/Statex/Statex';
 function App() {
   return (
     <div className="App">
-      <Statex />
+      <Statex/>
     </div>
   );
 }
